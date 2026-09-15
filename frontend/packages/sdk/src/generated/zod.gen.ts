@@ -2950,8 +2950,8 @@ export const zDeleteProjectPath = z.object({
 export const zDeleteProjectResponse = z.void();
 
 export const zGetProjectUsagePath = z.object({
-    orgID: z.string().regex(/^org_[a-z2-7]{26}$/),
-    projectID: z.string().regex(/^proj_[a-z2-7]{26}$/)
+    orgID: zOrganizationId,
+    projectID: zProjectId
 });
 
 /**
@@ -3567,9 +3567,9 @@ export const zRenameAgentProfilePath = z.object({
 export const zRenameAgentProfileResponse = zAgentProfile;
 
 export const zGetAgentProfileUsagePath = z.object({
-    orgID: z.string().regex(/^org_[a-z2-7]{26}$/),
-    projectID: z.string().regex(/^proj_[a-z2-7]{26}$/),
-    agentProfileID: z.string().regex(/^aprf_[a-z2-7]{26}$/)
+    orgID: zOrganizationId,
+    projectID: zProjectId,
+    agentProfileID: zAgentProfileId
 });
 
 /**
@@ -3739,9 +3739,9 @@ export const zGetAgentPath = z.object({
 export const zGetAgentResponse2 = zGetAgentResponse;
 
 export const zGetAgentUsagePath = z.object({
-    orgID: z.string().regex(/^org_[a-z2-7]{26}$/),
-    projectID: z.string().regex(/^proj_[a-z2-7]{26}$/),
-    agentID: z.string().regex(/^agt_[a-z2-7]{26}$/)
+    orgID: zOrganizationId,
+    projectID: zProjectId,
+    agentID: zAgentId
 });
 
 export const zGetAgentUsageQuery = z.object({

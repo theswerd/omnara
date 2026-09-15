@@ -4539,8 +4539,8 @@ export type DeleteProjectResponse = DeleteProjectResponses[keyof DeleteProjectRe
 export type GetProjectUsageData = {
     body?: never;
     path: {
-        orgID: string;
-        projectID: string;
+        orgID: OrganizationId;
+        projectID: ProjectId;
     };
     query?: never;
     url: '/orgs/{orgID}/projects/{projectID}/usage';
@@ -8065,9 +8065,9 @@ export type RenameAgentProfileResponse = RenameAgentProfileResponses[keyof Renam
 export type GetAgentProfileUsageData = {
     body?: never;
     path: {
-        orgID: string;
-        projectID: string;
-        agentProfileID: string;
+        orgID: OrganizationId;
+        projectID: ProjectId;
+        agentProfileID: AgentProfileId;
     };
     query?: never;
     url: '/orgs/{orgID}/projects/{projectID}/agent-profiles/{agentProfileID}/usage';
@@ -8943,9 +8943,9 @@ export type GetAgentResponse2 = GetAgentResponses[keyof GetAgentResponses];
 export type GetAgentUsageData = {
     body?: never;
     path: {
-        orgID: string;
-        projectID: string;
-        agentID: string;
+        orgID: OrganizationId;
+        projectID: ProjectId;
+        agentID: AgentId;
     };
     query?: {
         /**

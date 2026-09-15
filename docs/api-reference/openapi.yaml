@@ -761,14 +761,12 @@ paths:
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^org_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/OrganizationID'
       - name: projectID
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^proj_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/ProjectID'
     get:
       operationId: getProjectUsage
       tags: [Organizations and Projects]
@@ -2790,20 +2788,17 @@ paths:
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^org_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/OrganizationID'
       - name: projectID
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^proj_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/ProjectID'
       - name: agentProfileID
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^aprf_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/AgentProfileID'
     get:
       operationId: getAgentProfileUsage
       tags: [Configs and Profiles]
@@ -3396,20 +3391,17 @@ paths:
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^org_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/OrganizationID'
       - name: projectID
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^proj_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/ProjectID'
       - name: agentID
         in: path
         required: true
         schema:
-          type: string
-          pattern: '^agt_[a-z2-7]{26}$'
+          $ref: '#/components/schemas/AgentID'
     get:
       operationId: getAgentUsage
       tags: [Agents]

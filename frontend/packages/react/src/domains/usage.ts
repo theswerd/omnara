@@ -4,9 +4,10 @@ import {
   getOrgUsageOptions,
   getProjectUsageOptions,
 } from '@omnara/sdk/tanstack'
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { keepPreviousData, type Query, useQuery } from '@tanstack/react-query'
 
 import { useOmnaraClient } from '../omnara-client'
+import { generatedQueryKey } from './query-keys'
 
 export function useOrgUsage(orgID: string) {
   const client = useOmnaraClient()
@@ -40,4 +41,13 @@ export function useAgentUsage(
     }),
     placeholderData: keepPreviousData,
   })
+}
+
+export function agentUsageQueryPredicate(orgID: string, projectID: string) {
+  return (query: Query): boolean => {
+    const key = generatedQueryKey(query)
+    return (
+      key?._id === 'getAgentUsage' && key.path?.orgID === orgID && key.path.projectID === projectID
+    )
+  }
 }
