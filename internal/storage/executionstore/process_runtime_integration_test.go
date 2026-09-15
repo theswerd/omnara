@@ -1183,21 +1183,16 @@ func TestUploadArtifactPublishesResultWithoutParsingTerminalOutput(t *testing.T)
 	}{
 		{
 			name:           "stored_artifact",
-			toolName:       "upload_artifact",
+			toolName:       "upload_file",
+			input:          json.RawMessage(`{"path":"/artifacts","source":"screenshot.png"}`),
 			createArtifact: true,
 			wantOutcome:    executionstore.ToolResultOutcomeSucceeded,
 		},
 		{
 			name:        "missing_artifact",
-			toolName:    "upload_artifact",
+			toolName:    "upload_file",
+			input:       json.RawMessage(`{"path":"/artifacts","source":"screenshot.png"}`),
 			wantOutcome: executionstore.ToolResultOutcomeFailed,
-		},
-		{
-			name:           "stored_file",
-			toolName:       "upload_file",
-			input:          json.RawMessage(`{"path":"/artifacts","source":"screenshot.png"}`),
-			createArtifact: true,
-			wantOutcome:    executionstore.ToolResultOutcomeSucceeded,
 		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
@@ -1328,7 +1323,7 @@ func TestUploadArtifactPublishesResultWithoutParsingTerminalOutput(t *testing.T)
 			if test.createArtifact {
 				publicArtifactID := publicResourceID(publicid.KindArtifact, artifactID)
 				wantContent := []byte(
-					`[{"type":"structured_data","value":{"artifact_id":"` + publicArtifactID +
+					`[{"type":"structured_data","value":{"path":"/artifacts/` + publicArtifactID +
 						`"}},{"type":"media_ref","artifact_id":"` + artifactID.String() +
 						`","exclude_from_model_context":true}]`,
 				)
@@ -1358,7 +1353,7 @@ func TestUploadArtifactPublishesResultWithoutParsingTerminalOutput(t *testing.T)
 					)
 				}
 				wantModelContent := []byte(
-					`[{"type":"structured_data","value":{"artifact_id":"` + publicArtifactID + `"}}]`,
+					`[{"type":"structured_data","value":{"path":"/artifacts/` + publicArtifactID + `"}}]`,
 				)
 				if result.Outcome != test.wantOutcome ||
 					!sameJSON(result.ResultContentParts, wantModelContent) {
